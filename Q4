@@ -1,0 +1,45 @@
+import java.util.Scanner;
+
+public class AvaliacaoAluno {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Leitura do nome do aluno
+        System.out.print("Digite o nome do aluno: ");
+        String nome = scanner.nextLine();
+
+        // Leitura e validação das notas
+        double nota1 = lerNota(scanner, "primeiro trimestre", 0, 30);
+        double nota2 = lerNota(scanner, "segundo trimestre", 0, 35);
+        double nota3 = lerNota(scanner, "terceiro trimestre", 0, 35);
+
+        // Cálculo da nota final
+        double notaFinal = nota1 + nota2 + nota3;
+
+        // Exibição da nota final
+        System.out.printf("Nota final de %s: %.2f\n", nome, notaFinal);
+
+        // Verificação da aprovação
+        if (notaFinal >= 70) {
+            System.out.println(nome + " está aprovado.");
+        } else {
+            double pontosFaltando = 70 - notaFinal;
+            System.out.printf(nome + " está reprovado. Faltam %.2f pontos para aprovação.\n", pontosFaltando);
+        }
+
+        scanner.close();
+    }
+
+    // Método para ler e validar a nota
+    private static double lerNota(Scanner scanner, String trimestre, double min, double max) {
+        double nota;
+        do {
+            System.out.printf("Digite a nota do %s (%.0f a %.0f): ", trimestre, min, max);
+            nota = scanner.nextDouble();
+            if (nota < min || nota > max) {
+                System.out.println("Nota inválida. Por favor, insira uma nota dentro do intervalo.");
+            }
+        } while (nota < min || nota > max);
+        return nota;
+    }
+}
