@@ -1,0 +1,60 @@
+import java.util.Scanner;
+
+class Produto {
+    private String nome;
+    private double preco;
+    private int quantidade;
+
+    public Produto(String nome, double preco, int quantidade) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidade = quantidade;
+    }
+
+    public double valorTotalEstoque() {
+        return preco * quantidade;
+    }
+
+    public void adicionarEstoque(int quantidade) {
+        this.quantidade += quantidade;
+    }
+
+    public boolean removerEstoque(int quantidade) {
+        if (quantidade > this.quantidade) {
+            return false; // Não há estoque suficiente
+        }
+        this.quantidade -= quantidade;
+        return true;
+    }
+
+    public void exibirDados() {
+        System.out.println("Nome: " + nome);
+        System.out.println("Preço: R$ " + preco);
+        System.out.println("Quantidade em estoque: " + quantidade);
+        System.out.println("Valor total no estoque: R$ " + valorTotalEstoque());
+    }
+}
+
+public class Estoque {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Leitura dos dados do produto
+        System.out.print("Nome do produto: ");
+        String nome = sc.nextLine();
+        System.out.print("Preço do produto: ");
+        double preco = sc.nextDouble();
+        System.out.print("Quantidade no estoque: ");
+        int quantidade = sc.nextInt();
+
+        Produto produto = new Produto(nome, preco, quantidade);
+
+        // Exibir dados do produto
+        System.out.println("\nDados do produto:");
+        produto.exibirDados();
+
+        // Entrada no estoque
+        System.out.print("\nQuantidade para adicionar ao estoque: ");
+        int entrada = sc.nextInt();
+        produto.adicionarEstoque(entrada);
+        System
