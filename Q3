@@ -1,0 +1,50 @@
+import java.util.Scanner;
+
+public class TrianguloArea {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Entrada dos lados do triângulo X
+        System.out.println("Digite os lados do triângulo X:");
+        System.out.print("Lado a: ");
+        double ladoAX = scanner.nextDouble();
+        System.out.print("Lado b: ");
+        double ladoBX = scanner.nextDouble();
+        System.out.print("Lado c: ");
+        double ladoCX = scanner.nextDouble();
+
+        // Entrada dos lados do triângulo Y
+        System.out.println("Digite os lados do triângulo Y:");
+        System.out.print("Lado a: ");
+        double ladoAY = scanner.nextDouble();
+        System.out.print("Lado b: ");
+        double ladoBY = scanner.nextDouble();
+        System.out.print("Lado c: ");
+        double ladoCY = scanner.nextDouble();
+
+        // Calcula a área dos triângulos usando a fórmula de Heron
+        double areaTrianguloX = calcularArea(ladoAX, ladoBX, ladoCX);
+        double areaTrianguloY = calcularArea(ladoAY, ladoBY, ladoCY);
+
+        // Exibe as áreas
+        System.out.printf("Área do triângulo X: %.2f\n", areaTrianguloX);
+        System.out.printf("Área do triângulo Y: %.2f\n", areaTrianguloY);
+
+        // Informa qual triângulo possui a maior área
+        if (areaTrianguloX > areaTrianguloY) {
+            System.out.println("O triângulo X possui a maior área.");
+        } else if (areaTrianguloY > areaTrianguloX) {
+            System.out.println("O triângulo Y possui a maior área.");
+        } else {
+            System.out.println("Os dois triângulos possuem a mesma área.");
+        }
+
+        scanner.close();
+    }
+
+    // Método para calcular a área do triângulo usando a fórmula de Heron
+    public static double calcularArea(double a, double b, double c) {
+        double semiPerimetro = (a + b + c) / 2.0;
+        return Math.sqrt(semiPerimetro * (semiPerimetro - a) * (semiPerimetro - b) * (semiPerimetro - c));
+    }
+}
