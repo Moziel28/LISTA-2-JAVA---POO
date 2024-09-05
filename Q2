@@ -1,0 +1,110 @@
+import java.util.Scanner;
+
+class Produto {
+    private String nome;
+    private double preco;
+    private int quantidade;
+
+    // Construtor
+    public Produto(String nome, double preco, int quantidade) {
+        this.nome = nome;
+        this.preco = preco;
+        this.quantidade = quantidade;
+    }
+
+    // Métodos de acesso (getters e setters)
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    // Método para mostrar os dados do produto
+    public void mostrarDados() {
+        System.out.printf("Nome do produto: %s%n", nome);
+        System.out.printf("Preço unitário: R$ %.2f%n", preco);
+        System.out.printf("Quantidade no estoque: %d%n", quantidade);
+        System.out.printf("Valor total no estoque: R$ %.2f%n", calcularValorTotal());
+    }
+
+    // Método para calcular o valor total no estoque
+    private double calcularValorTotal() {
+        return preco * quantidade;
+    }
+
+    // Método para realizar entrada de estoque
+    public void entradaEstoque(int quantidadeEntrada) {
+        if (quantidadeEntrada > 0) {
+            quantidade += quantidadeEntrada;
+        }
+    }
+
+    // Método para realizar saída de estoque
+    public void saidaEstoque(int quantidadeSaida) {
+        if (quantidadeSaida > quantidade) {
+            System.out.println("Erro: A quantidade saída é maior do que a disponível em estoque.");
+        } else {
+            quantidade -= quantidadeSaida;
+        }
+    }
+}
+
+public class GerenciamentoEstoque {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Leitura dos dados iniciais do produto
+        System.out.print("Digite o nome do produto: ");
+        String nome = scanner.nextLine();
+
+        System.out.print("Digite o preço do produto: R$ ");
+        double preco = scanner.nextDouble();
+
+        System.out.print("Digite a quantidade inicial no estoque: ");
+        int quantidade = scanner.nextInt();
+
+        Produto produto = new Produto(nome, preco, quantidade);
+
+        // Mostrar dados iniciais do produto
+        System.out.println("\nDados iniciais do produto:");
+        produto.mostrarDados();
+
+        // Entrada no estoque
+        System.out.print("\nDigite a quantidade para entrada no estoque: ");
+        int quantidadeEntrada = scanner.nextInt();
+        produto.entradaEstoque(quantidadeEntrada);
+
+        // Mostrar dados após a entrada
+        System.out.println("\nDados do produto após entrada no estoque:");
+        produto.mostrarDados();
+
+        // Saída no estoque
+        System.out.print("\nDigite a quantidade para saída do estoque: ");
+        int quantidadeSaida = scanner.nextInt();
+        produto.saidaEstoque(quantidadeSaida);
+
+        // Mostrar dados após a saída
+        System.out.println("\nDados do produto após saída do estoque:");
+        produto.mostrarDados();
+
+        scanner.close();
+    }
+}
